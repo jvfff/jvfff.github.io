@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexão Solidária</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Conexão Solidária</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#main">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Conectando ONGs e Voluntários</h1>
+                <p>Faça parte da mudança. Junte-se a nós e ajude a transformar o mundo através do voluntariado.</p>
+                <a href="#contact" class="btn-cta">Seja Voluntário</a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="about-container">
+                <img src="https://noticias.capivari.sp.gov.br/wp-content/uploads/2021/04/site.jpg" alt="Imagem sobre nós">
+                <div class="about-content">
+                    <h2>Sobre Nós</h2>
+                    <p>Conexão Solidária é uma plataforma que visa conectar ONGs a pessoas que desejam se voluntariar. Nosso objetivo é facilitar o encontro de oportunidades de voluntariado para quem quer contribuir com o mundo e ajudar causas que fazem a diferença. Trabalhamos com diversas ONGs de todo o país, conectando pessoas dispostas a transformar o mundo com suas habilidades e dedicação.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <section id="contact" class="contact-section">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Entre em Contato</h2>
+                    <p>Quer saber mais sobre o nosso trabalho ou precisa de ajuda? Fale conosco!</p>
+                    <img src="https://t.ctcdn.com.br/PRucjaRjWNnrxCP-GH7MH_NTbj4=/640x360/smart/i490311.jpeg" alt="Imagem de contato">
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm" action="#" method="post">
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" name="name" required>
+                    
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    
+                        <label for="message">Mensagem:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    
+                        <button type="submit">Enviar</button>
+                        <p id="formStatus"></p>
+                    </form>                    
+                </div>
+            </div>
+        </section>
+        <div class="footer-info">
+            <p>&copy; 2024 Conexão Solidária - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
