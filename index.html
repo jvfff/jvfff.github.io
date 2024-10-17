@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loyal Gráfica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1 class="animated-title">Loyal Gráfica</h1>
+        <div class="hamburger" id="hamburger-menu">☰</div>
+        <nav class="nav-bar" id="nav-bar">
+            <ul>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Serviços</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
+                <li><a href="#testimonials" class="nav-link">Depoimentos</a></li>
+                <li><a href="#about" class="nav-link">Sobre Nós</a></li>
+                <li><a href="#contact" class="nav-link">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="home">
+            <div class="hero-container">
+                <h2 class="hero-title">Transformando Ideias em Impressões</h2>
+                <p class="hero-subtitle">Seu parceiro criativo para dar vida às suas ideias com qualidade e inovação.</p>
+                <a href="#services"><button class="hero-button">Saiba Mais</button></a>
+            </div>
+        </section>
+        <section id="services" class="services">
+            <h2 class="section-title">Serviços</h2>
+            <div class="services-container">
+                <div class="service-card animated-card">
+                    <h3>Fachadas</h3>
+                    <p>Lonas, ACM, Caixa Alta, Banner, Cavalete, Windbanner e muito mais.</p>
+                </div>
+                <div class="service-card animated-card">
+                    <h3>Estampas em Camisa</h3>
+                    <p>Sublimação total e parcial para camisas.</p>
+                </div>
+                <div class="service-card animated-card">
+                    <h3>Personalizados</h3>
+                    <p>Caneca, agenda, caderno, cardápio, bloquinho, comanda e outros itens personalizados.</p>
+                </div>
+                <div class="service-card animated-card">
+                    <h3>Cartões de Visita e Materiais Gráficos</h3>
+                    <p>Cartões de visita, panfletos, ímãs, tag, crachá, marcador de página, porta copo e muito mais.</p>
+                </div>
+                <div class="service-card animated-card">
+                    <h3>Adesivos</h3>
+                    <p>Microperfurado, recorte eletrônico, vinil e outros tipos de adesivos.</p>
+                </div>
+            </div>
+        </section>        
+        <section id="portfolio" class="portfolio">
+            <h2 class="section-title">Portfólio</h2>
+            <div class="portfolio-gallery">
+                <div class="gallery-item animated-gallery"><img src="img/1.jpg" alt="Trabalho 1"></div>
+                <div class="gallery-item animated-gallery"><img src="img/2.jpg" alt="Trabalho 2"></div>
+                <div class="gallery-item animated-gallery"><img src="img/3.jpg" alt="Trabalho 3"></div>
+            </div>
+        </section>
+        <section id="testimonials" class="testimonials">
+            <h2 class="section-title">Depoimentos</h2>
+            <div class="testimonials-container">
+                <div class="testimonial animated-testimonial">
+                    <p>"A Loyal Gráfica superou nossas expectativas com a qualidade e rapidez dos serviços!"</p>
+                    <h4>- Ana Souza, Cliente Satisfeita</h4>
+                </div>
+                <div class="testimonial animated-testimonial">
+                    <p>"Trabalhar com a Loyal foi uma experiência incrível. O design gráfico foi impecável!"</p>
+                    <h4>- Carlos Mendes, Proprietário de Negócio</h4>
+                </div>
+                <div class="testimonial animated-testimonial">
+                    <p>"Excelente atendimento e resultado final maravilhoso. Recomendo para todos!"</p>
+                    <h4>- Beatriz Lima, Diretora de Marketing</h4>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="about">
+            <h2 class="section-title">Sobre Nós</h2>
+            <div class="about-content">
+                <p>Na Loyal Gráfica, acreditamos que cada impressão conta uma história. Com anos de experiência no mercado gráfico, nossa missão é transformar suas ideias em materiais de alta qualidade, garantindo sempre um atendimento personalizado e um resultado que surpreenda.</p>
+                <p>Nosso time é composto por designers, especialistas em impressão e profissionais dedicados que amam o que fazem. Estamos prontos para ajudá-lo a criar materiais únicos, que destaquem sua marca e alcancem seu público.</p>
+            </div>
+        </section>
+        <section id="contact" class="contact">
+            <h2 class="section-title">Contato</h2>
+            <div class="contact-container">
+                <form class="contact-form animated-form" id="whatsapp-form">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                    
+                    <button type="submit" class="form-button">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-social">
+            <a href="https://www.instagram.com/loyal.grafica/" class="social-link">Instagram</a>
+        </div>
+        <p>&copy; 2024 Loyal Gráfica. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
