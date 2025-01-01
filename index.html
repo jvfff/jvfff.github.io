@@ -95,6 +95,7 @@
       transform: translateY(-2px) scale(1.02);
       background: #f8f8f8;
     }
+
     button:active {
       transform: translateY(2px) scale(0.98);
     }
@@ -124,7 +125,8 @@
 </head>
 <body>
 
-  <audio src="a.mp3" autoplay loop id="bgMusic"></audio>
+  <!-- Removido o autoplay para evitar que o áudio inicie sozinho -->
+  <audio src="a.mp3" loop id="bgMusic"></audio>
 
   <div class="container">
     <h1>Garoah é gay ou europeu?</h1>
@@ -139,15 +141,18 @@
     const btnSim = document.getElementById("btnSim");
     const btnNao = document.getElementById("btnNao");
     const mensagem = document.getElementById("mensagem");
+    const bgMusic = document.getElementById("bgMusic");
 
     btnSim.addEventListener("click", () => {
       mensagem.textContent = "É Gay. \u{1F917}";
       mensagem.classList.add("show");
+      bgMusic.play();
     });
 
     btnNao.addEventListener("click", () => {
       mensagem.textContent = "É Gay. \u{1F97A}";
       mensagem.classList.add("show");
+      bgMusic.play();
     });
   </script>
 </body>
