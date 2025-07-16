@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManhwaShelf - Sua Estante Pessoal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <h1>ManhwaShelf</h1>
+        <p>Sua estante virtual de Manhwas e Webtoons</p>
+        <div class="data-management">
+            <button id="import-btn" class="btn-data">Importar Dados</button>
+            <button id="export-btn" class="btn-data">Exportar Backup</button>
+            <input type="file" id="import-file" style="display: none;" accept=".json">
+        </div>
+        <p>Todas as suas alterações são salvas automaticamente no seu navegador, porém também é possível exportar seus manhwas e importar em outros dispositivos.</p>
+    </header>
+
+    <main>
+        <div class="add-manhwa-container">
+            <h3>Adicionar Novo Manhwa</h3>
+            <form id="add-form">
+                <input type="text" id="form-titulo" placeholder="Título do Manhwa" required>
+                <input type="url" id="form-capa" placeholder="URL da Imagem da Capa" required>
+                <input type="url" id="form-link" placeholder="Link de Onde Você Lê">
+                <input type="number" id="form-capitulo-atual" placeholder="Capítulo Atual" value="0" required>
+                <select id="form-status" required>
+                    <option value="Lendo Atualmente">Lendo Atualmente</option>
+                    <option value="Planejo Ler">Planejo Ler</option>
+                    <option value="Concluído">Concluído</option>
+                </select>
+                <button type="submit">Adicionar à Estante</button>
+            </form>
+        </div>
+
+        <section class="shelf">
+            <h2>Lendo Atualmente</h2>
+            <div class="manhwa-grid" id="grid-lendo"></div>
+        </section>
+
+        <section class="shelf">
+            <h2>Planejo Ler</h2>
+            <div class="manhwa-grid" id="grid-planejo"></div>
+        </section>
+
+        <section class="shelf">
+            <h2>Concluídos</h2>
+            <div class="manhwa-grid" id="grid-concluidos"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>By João França</p>
+    </footer>
+
+    <div id="edit-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <h2>Editar Manhwa</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-manhwa-id">
+                <label for="edit-titulo">Título:</label>
+                <input type="text" id="edit-titulo" required>
+                <label for="edit-capa">URL da Capa:</label>
+                <input type="url" id="edit-capa" required>
+                <label for="edit-link">Link de Leitura:</label>
+                <input type="url" id="edit-link">
+                <button type="submit">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
