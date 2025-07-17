@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ManhwaShelf - Sua Estante Pessoal</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
             <button id="export-btn" class="btn-data">Exportar Backup</button>
             <input type="file" id="import-file" style="display: none;" accept=".json">
         </div>
-        <p>Todas as suas alterações são salvas automaticamente no seu navegador, porém também é possível exportar seus manhwas e importar em outros dispositivos.</p>
+        <p>Todas as suas alterações são salvas automaticamente no seu navegador.</p>
     </header>
 
     <main>
@@ -35,6 +35,16 @@
                     <option value="Lendo Atualmente">Lendo Atualmente</option>
                     <option value="Planejo Ler">Planejo Ler</option>
                     <option value="Concluído">Concluído</option>
+                </select>
+                <select id="form-dia-lancamento">
+                    <option value="-1">Dia do Lançamento (Opcional)</option>
+                    <option value="0">Domingo</option>
+                    <option value="1">Segunda-feira</option>
+                    <option value="2">Terça-feira</option>
+                    <option value="3">Quarta-feira</option>
+                    <option value="4">Quinta-feira</option>
+                    <option value="5">Sexta-feira</option>
+                    <option value="6">Sábado</option>
                 </select>
                 <button type="submit">Adicionar à Estante</button>
             </form>
@@ -72,6 +82,17 @@
                 <input type="url" id="edit-capa" required>
                 <label for="edit-link">Link de Leitura:</label>
                 <input type="url" id="edit-link">
+                <label for="edit-dia-lancamento">Dia do Lançamento:</label>
+                <select id="edit-dia-lancamento">
+                    <option value="-1">Nunca</option>
+                    <option value="0">Domingo</option>
+                    <option value="1">Segunda-feira</option>
+                    <option value="2">Terça-feira</option>
+                    <option value="3">Quarta-feira</option>
+                    <option value="4">Quinta-feira</option>
+                    <option value="5">Sexta-feira</option>
+                    <option value="6">Sábado</option>
+                </select>
                 <button type="submit">Salvar Alterações</button>
             </form>
         </div>

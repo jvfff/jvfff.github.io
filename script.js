@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     loadManhwas();
     setupEventListeners();
@@ -74,7 +73,31 @@ function renderShelves(manhwas, isInitialLoad = false) {
 }
 
 function createManhwaCard(manhwa) {
-    return `<div class="manhwa-card" data-id="${manhwa.id}" draggable="true"> <button class="btn-remove" title="Remover Manhwa"><i class="fa-solid fa-xmark"></i></button> <button class="btn-edit" title="Editar Manhwa"><i class="fa-solid fa-pencil"></i></button> <img src="${manhwa.capa}" alt="Capa de ${manhwa.titulo}" onerror="this.src='https://via.placeholder.com/200x280?text=Capa+Indisponível'"> <div class="manhwa-info"> <h3>${manhwa.titulo}</h3> <div class="progress-info"><span>Cap. ${manhwa.capitulo_atual}</span></div> <div class="actions"> <button class="btn-decrement" title="Diminuir capítulo"><i class="fa-solid fa-minus"></i></button> <input type="number" class="chapter-input" value="${manhwa.capitulo_atual}" min="0"> <button class="btn-increment" title="Aumentar capítulo"><i class="fa-solid fa-plus"></i></button> </div> </div> </div>`;
+    const today = new Date();
+    const todayDateString = today.toDateString();
+    const releaseDay = new Date().getDay();
+    
+    const lastSeenDate = manhwa.ultimoCapituloVisto ? new Date(manhwa.ultimoCapituloVisto).toDateString() : null;
+
+    const hasNewChapter = manhwa.diaLancamento != null && 
+                          manhwa.diaLancamento == releaseDay &&
+                          lastSeenDate !== todayDateString;
+
+    return `<div class="manhwa-card" data-id="${manhwa.id}" draggable="true"> 
+                ${hasNewChapter ? '<div class="new-chapter-badge">Novo!</div>' : ''}
+                <button class="btn-remove" title="Remover Manhwa"><i class="fa-solid fa-xmark"></i></button> 
+                <button class="btn-edit" title="Editar Manhwa"><i class="fa-solid fa-pencil"></i></button> 
+                <img src="${manhwa.capa}" alt="Capa de ${manhwa.titulo}" onerror="this.src='https://via.placeholder.com/200x280?text=Capa+Indisponível'"> 
+                <div class="manhwa-info"> 
+                    <h3>${manhwa.titulo}</h3> 
+                    <div class="progress-info"><span>Cap. ${manhwa.capitulo_atual} / ${manhwa.total_capitulos > 0 ? manhwa.total_capitulos : '??'}</span></div> 
+                    <div class="actions"> 
+                        <button class="btn-decrement" title="Diminuir capítulo"><i class="fa-solid fa-minus"></i></button> 
+                        <input type="number" class="chapter-input" value="${manhwa.capitulo_atual}" min="0"> 
+                        <button class="btn-increment" title="Aumentar capítulo"><i class="fa-solid fa-plus"></i></button> 
+                    </div> 
+                </div> 
+            </div>`;
 }
 
 function addEventListeners() {
@@ -99,19 +122,30 @@ function addEventListeners() {
 
 function handleCardClick(event) {
     if (event.target.closest('button, input')) return;
+
     const card = event.currentTarget;
     const manhwaId = card.dataset.id;
     const manhwas = JSON.parse(localStorage.getItem('manhwaShelfData'));
-    const manhwa = manhwas.find(m => m.id == manhwaId);
-    if (manhwa && manhwa.link_leitura) {
-        window.open(manhwa.link_leitura, '_blank');
-    } else {
-        alert("Nenhum link de leitura cadastrado. Clique no lápis para editar e adicionar um link!");
-        openEditModal(manhwaId);
+    const manhwaIndex = manhwas.findIndex(m => m.id == manhwaId);
+    
+    if (manhwaIndex > -1) {
+        const manhwa = manhwas[manhwaIndex];
+        
+        manhwa.ultimoCapituloVisto = new Date().toISOString();
+        localStorage.setItem('manhwaShelfData', JSON.stringify(manhwas));
+        renderShelves(manhwas);
+
+        if (manhwa.link_leitura) {
+            window.open(manhwa.link_leitura, '_blank');
+        } else {
+            alert("Nenhum link de leitura cadastrado. Clique no lápis para editar e adicionar um link!");
+            openEditModal(manhwaId);
+        }
     }
 }
 
 function addNewManhwa() {
+    const diaLancamentoValue = parseInt(document.getElementById('form-dia-lancamento').value);
     const newManhwa = {
         id: new Date().getTime(),
         titulo: document.getElementById('form-titulo').value,
@@ -119,7 +153,9 @@ function addNewManhwa() {
         link_leitura: document.getElementById('form-link').value,
         status: document.getElementById('form-status').value,
         capitulo_atual: parseInt(document.getElementById('form-capitulo-atual').value) || 0,
-        total_capitulos: 0
+        total_capitulos: 0,
+        diaLancamento: diaLancamentoValue === -1 ? null : diaLancamentoValue,
+        ultimoCapituloVisto: null
     };
     const manhwas = JSON.parse(localStorage.getItem('manhwaShelfData'));
     manhwas.push(newManhwa);
@@ -167,6 +203,7 @@ function openEditModal(manhwaId) {
     document.getElementById('edit-titulo').value = manhwa.titulo;
     document.getElementById('edit-capa').value = manhwa.capa;
     document.getElementById('edit-link').value = manhwa.link_leitura || '';
+    document.getElementById('edit-dia-lancamento').value = manhwa.diaLancamento !== null ? manhwa.diaLancamento : -1;
     document.getElementById('edit-modal').style.display = 'flex';
 }
 
@@ -175,9 +212,11 @@ function saveManhwaChanges() {
     const manhwas = JSON.parse(localStorage.getItem('manhwaShelfData'));
     const manhwaIndex = manhwas.findIndex(m => m.id == manhwaId);
     if (manhwaIndex > -1) {
+        const diaLancamentoValue = parseInt(document.getElementById('edit-dia-lancamento').value);
         manhwas[manhwaIndex].titulo = document.getElementById('edit-titulo').value;
         manhwas[manhwaIndex].capa = document.getElementById('edit-capa').value;
         manhwas[manhwaIndex].link_leitura = document.getElementById('edit-link').value;
+        manhwas[manhwaIndex].diaLancamento = diaLancamentoValue === -1 ? null : diaLancamentoValue;
         localStorage.setItem('manhwaShelfData', JSON.stringify(manhwas));
         renderShelves(manhwas);
     }
@@ -211,8 +250,13 @@ function importData(event) {
             const importedManhwas = JSON.parse(e.target.result);
             if (Array.isArray(importedManhwas) && (importedManhwas.length === 0 || importedManhwas[0].hasOwnProperty('titulo'))) {
                 if(confirm("Isso irá substituir todos os seus dados atuais. Deseja continuar?")) {
-                    localStorage.setItem('manhwaShelfData', JSON.stringify(importedManhwas));
-                    renderShelves(importedManhwas, true);
+                    const sanitizedManhwas = importedManhwas.map(m => ({
+                        ...m,
+                        diaLancamento: m.diaLancamento !== undefined ? m.diaLancamento : null,
+                        ultimoCapituloVisto: m.ultimoCapituloVisto !== undefined ? m.ultimoCapituloVisto : null
+                    }));
+                    localStorage.setItem('manhwaShelfData', JSON.stringify(sanitizedManhwas));
+                    renderShelves(sanitizedManhwas, true);
                     alert("Dados importados com sucesso!");
                 }
             } else {
